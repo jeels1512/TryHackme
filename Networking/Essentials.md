@@ -36,5 +36,7 @@ In other words, it can be used to learn that the target is alive and that its re
 **traceroute: this command is called tracert on MS Windows systems. It uses ICMP to discover the termroute from 
 your host to the target.**
 
+**We have lots of devices and users who are using internet and for this, we need to assign IP to all the devices
+but we are also limited with this IPv4 as well we can have 2^64 numbers of ips we can assign so that to cover this problem we have NAT(Network Address Translation) so we only need to assign one public IP to one router and then that router will assign different private IPs with connected devices in the private sections like mobile, computer or CCTVs.**
 
 
