@@ -6,3 +6,8 @@
 By this command, we can get all the information about that particular entity, such as registering a domain name, 
 including name, phone number, email, and address.**
 
+HTTP is designed to retrieve web pages, File Transfer Protocol(FTP) is designed to transfer files. 
+
+ftp IP address to connect to the remote FTP server using the local ftp client.
+
+ls
