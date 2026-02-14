@@ -48,4 +48,25 @@ Examples of the network layer include Internet Protocol (IP), Internet Control M
 | 2       | Data Link Layer     | Link Layer               | Ethernet (802.3), Wi-Fi (802.11)            |
 | 1       | Physical Layer      | Link Layer               | Copper, Fiber, Radio signals                |
 
+**At layer 4, there are two types of protocols to transfer the information: 1. TCP and 2.UDP**
 
+1. TCP(Transmission Control Protocol): While transferring the information, this protocol first makes the connection with the receiver and tries to ensure no data is lost. For this to happen, it uses the three-way handshake method. That is why this protocol is slow while transferring.
+
+2. UDP(User Datagram Protocol): UDP is a simple connectionless protocol. Being connectionless means that it does not need to establish a connection. This protocol does not even provide machenism to know that the packet has been delivered.
+
+One more important concept is **Encapsulation**
+
+encapsulation refers to the process of every layer adding a header (and sometimes a trailer) to the received unit of data and sending the “encapsulated” unit to the layer below.
+
+The TELNET (Teletype Network) protocol is a network protocol for remote terminal connection. In simpler words, telnet, a TELNET client, allows you to connect to and communicate with a remote system and issue text commands. Although initially it was used for remote administration, we can use telnet to connect to any server listening on a TCP port number.
+
+**telnet MACHINE_IP 80
+Trying MACHINE_IP...
+Connected to MACHINE_IP.
+Escape character is '^]'.
+GET / HTTP/1.1
+Host: telnet.thm
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+[...]**
