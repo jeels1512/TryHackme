@@ -61,12 +61,19 @@ encapsulation refers to the process of every layer adding a header (and sometime
 The TELNET (Teletype Network) protocol is a network protocol for remote terminal connection. In simpler words, telnet, a TELNET client, allows you to connect to and communicate with a remote system and issue text commands. Although initially it was used for remote administration, we can use telnet to connect to any server listening on a TCP port number.
 
 **telnet MACHINE_IP 80
+
 Trying MACHINE_IP...
+
 Connected to MACHINE_IP.
+
 Escape character is '^]'.
+
 GET / HTTP/1.1
+
 Host: telnet.thm
 
 HTTP/1.1 200 OK
+
 Content-Type: text/html
+
 [...]**
