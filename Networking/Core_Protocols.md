@@ -10,4 +10,6 @@ HTTP is designed to retrieve web pages, File Transfer Protocol(FTP) is designed 
 
 ftp IP address to connect to the remote FTP server using the local ftp client.
 
-ls
+**STMP: Sending Email**
+
+Simple Mail Transfer Protocol 
