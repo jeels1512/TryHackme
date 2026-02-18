@@ -14,7 +14,7 @@ ftp IP address to connect to the remote FTP server using the local ftp client. T
 
 Simple Mail Transfer Protocol is helpful for sending emails on the server. This protocol works on TCP port 25.
 
-**HELO or EHLO initiates an SMTP session,
+HELO or EHLO initiates an SMTP session,
 
 MAIL FROM specifies the sender’s email address,
 
@@ -22,6 +22,23 @@ RCPT TO specifies the recipient’s email address,
 
 DATA indicates that the client will begin sending the content of the email message,
 
-. is sent on a line by itself to indicate the end of the email message**
+. is sent on a line by itself to indicate the end of the email message
 
 POP3: Reciving Email: This protocol works on TCP 110 port. 
+
+some common commands: 
+
+USER <username> identifies the user
+
+PASS <password> provides the user’s password
+
+STAT requests the number of messages and total size
+
+LIST lists all messages and their sizes
+
+RETR <message_number> retrieves the specified message
+
+DELE <message_number> marks a message for deletion
+
+QUIT ends the POP3 session applying changes, such as deletions
+
