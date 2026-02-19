@@ -42,3 +42,16 @@ DELE <message_number> marks a message for deletion
 
 QUIT ends the POP3 session, applying changes, such as deletions
 
+**IMAP is like the POP3 protocol, but the user wants to access multiple devices, it works on 143 port.**
+
+LOGIN <username> <password> authenticates the user
+
+SELECT <mailbox> selects the mailbox folder to work with
+
+FETCH <mail_number> <data_item_name> Example fetch 3 body[] to fetch message number 3, header and body.
+
+MOVE <sequence_set> <mailbox> moves the specified messages to another mailbox
+
+COPY <sequence_set> <data_item_name> copies the specified messages to another mailbox
+
+LOGOUT logs out
