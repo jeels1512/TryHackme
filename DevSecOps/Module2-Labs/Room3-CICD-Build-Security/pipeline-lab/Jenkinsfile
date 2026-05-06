@@ -1,0 +1,67 @@
+pipeline {
+    agent any
+
+    environment {
+        // Secrets injected from Jenkins credential store
+        AWS_CREDS = credentials('aws-prod-deploy')
+        DEPLOY_KEY = credentials('github-deploy-token')
+        KUBE_CONFIG = credentials('kubeconfig-prod')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'make build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'make test'
+            }
+        }
+
+        // VULNERABILITY: Debug stage left in production pipeline
+        stage('Debug Info') {
+            steps {
+                // Reads Jenkins master key — anyone with log access gets it
+                sh 'cat /var/lib/jenkins/secrets/master.key || true'
+                // Dumps ALL env vars including injected secrets
+                sh 'env'
+                // Prints build machine info useful for pivoting
+                sh 'cat /etc/passwd'
+                sh 'id && whoami && hostname'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'tar -czf app-build.tar.gz src/'
+                sh 'sha256sum app-build.tar.gz > app-build.tar.gz.sha256'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // No artifact integrity check before deploy
+                sh '''
+                    export KUBECONFIG=${KUBE_CONFIG}
+                    kubectl apply -f k8s/ --namespace production
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            // Publishes full build log including any leaked secrets
+            archiveArtifacts artifacts: '**/*.log', allowEmptyArchive: true
+        }
+    }
+}

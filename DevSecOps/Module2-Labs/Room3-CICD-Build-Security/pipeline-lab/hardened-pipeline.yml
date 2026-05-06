@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+# Minimum required permissions
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to immutable SHA (not floating tag)
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+      - uses: actions/setup-node@1a4442cacd436585916779262731d1f68fb5b8c5  # v3.8.0
+        with:
+          node-version: '18'
+
+      - run: npm ci --ignore-scripts        # --ignore-scripts prevents lifecycle PPE
+
+      - run: npm test
+
+      - name: Deploy
+        # Secret injected as env var — masked in logs
+        # NOT interpolated inline in the command
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: ./deploy.sh --env production
+
+      - name: Verify artifact before deploy
+        run: |
+          EXPECTED=$(cat dist/app.sha256)
+          ACTUAL=$(sha256sum dist/app.js | awk '{print $1}')
+          [ "$EXPECTED" = "$ACTUAL" ] || (echo "Integrity check failed!" && exit 1)
