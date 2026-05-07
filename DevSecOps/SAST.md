@@ -62,4 +62,4 @@ Every SAST tool is different, most of them will perform two tasks:
 
 1. Semantic tools: SAST tools automatically search for risky code patterns the same way a human reviewer manually searches for suspicious functions.
 
-2. 
+2. Dataflow Analysis: These are situations where potentially dangerous functions are in use, but it is not clear whether or not a vulnerability is present by analysing the local context around the function call. Take, for example, a function defined as follow: 
