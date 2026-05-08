@@ -80,3 +80,41 @@ have a configuration file called web.config, PHP will hold all of its configurat
 
 
 PSALM: PHP Static Analysis Linting Machine, a simple tool for analysing PHP code. [Psalm Installation Guide](https://psalm.dev/docs/running_psalm/installation/)
+
+**Run the Psalm using the following command from within the project's directroy:**
+
+.vendor/bin/psalm --no-cache
+
+**Psaml also offers the possibility to run dataflow analysis on our code using the --taint-analysis flag.**
+
+./vendor/bin/psalm --no-cache --taint-analysis
+
+We will generally be concerned with the following two things:
+
+1. False Positives: The tool reports on a vulnerability that is not present in the code.
+
+2. False Negatives: The tool does not report on a vulnerability that is present in the code.
+
+
+Usually, when we make a pull request or a merge request, SAST tools are attached to GitLab or GitHub so every single time we make a pull requst or a merge request, code is being checked for vulnerability and checking pull request ensures that the code that makes it to merges has udergone at least a basic security check but we want SAST tools running on both developer's IDE and CI/CD pipelines.
+
+**Integrating SAST tools in IDE**
+
+- Psalm: The tool we have been using supports IDE integration by installing the psalm into VS code dirextly form the vs code marketplace. This plugin will check anytime you type in real-time and show you the same alerts as the console version directly into your code. Taint analysis won't available.
+
+- Semgrep: Yet another SAST tool that can be installed into VS code directly from vs code marketplace. Just as Psalm, it will show inline alerts directly in your code. Semgrep even allows us to build custom rules if needed. You can check the rules that are loaded for this project on the semgrep-rules directory inside the project's directory.
+
+
+## File Inclusion Grep - Missing PHP Filter
+
+### Issue
+`grep -rn include(` was run without the PHP-only `--include=*.php` filter, increasing noise.
+This is a common mistake — the room notes **'Omitting --include filter'**.
+
+### Impact
+Noisy include/require hits slow down quick static sweep for file inclusion risks
+during code triage for a junior Application Security Engineer.
+
+### Flow
+- Ran broad recursive grep for `include(` across the directory
+- Re-ran the same broad grep again, then opened `view.php` to inspect hits
