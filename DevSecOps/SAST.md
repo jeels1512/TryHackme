@@ -1,3 +1,5 @@
+## SAST
+
 **Some of the functions that are typically used to send MySQL queries:**\
 
 Database engine: MySQL
@@ -62,4 +64,19 @@ Every SAST tool is different, most of them will perform two tasks:
 
 1. Semantic tools: SAST tools automatically search for risky code patterns the same way a human reviewer manually searches for suspicious functions.
 
-2. Dataflow Analysis: These are situations where potentially dangerous functions are in use, but it is not clear whether or not a vulnerability is present by analysing the local context around the function call. Take, for example, a function defined as follow: 
+2. Dataflow Analysis: These are situations where potentially dangerous functions are in use, but it is not clear whether or not a vulnerability is present by analysing the local context around the function call. Take, for example, a function defined as follows:
+
+3. Control-flow analysis: Analyses the order of operations in the code in search of a race condition, use of uninitialised variables or resource leaks. As an example,
+   Stirng cmd = System.gtProperty("cmd");
+
+   cmd = cmd.trm();
+
+   If the cmd property is not defined, the call to System.getProperty() will return NULL. Calling the trim method from a Null variable will throw an exception on runtime.
+
+4. Structural Analysis: Analyses specific code structures of each programming language. This includes following best practices when declaring classes, evaluating code blaocks that may never execute, correctly using try/catch, and other issues related to using insecure cryptographic material.
+
+5. Configuration Analysis: Searches for application configuration flaws rather than the code itself. As an example, applications running under Internet Information Services will 
+have a configuration file called web.config, PHP will hold all of its configuration options in a file called php.ini, and most applications will some configuration file. By checking configurations, the tool will identify possible improvements
+
+
+PSALM: PHP Static Analysis Linting Machine, a simple tool for analysing PHP code.[Psaml tool installation instruction]("https://psalm.dev/docs/running_psalm/installation/")
