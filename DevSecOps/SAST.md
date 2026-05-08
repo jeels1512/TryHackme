@@ -79,4 +79,4 @@ Every SAST tool is different, most of them will perform two tasks:
 have a configuration file called web.config, PHP will hold all of its configuration options in a file called php.ini, and most applications will some configuration file. By checking configurations, the tool will identify possible improvements
 
 
-PSALM: PHP Static Analysis Linting Machine, a simple tool for analysing PHP code.[Psaml tool installation instruction](https://psalm.dev/docs/running_psalm/installation/)
+PSALM: PHP Static Analysis Linting Machine, a simple tool for analysing PHP code. [Psalm Installation Guide](https://psalm.dev/docs/running_psalm/installation/)
